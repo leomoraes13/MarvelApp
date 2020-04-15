@@ -45,6 +45,10 @@ ext {
     androidXComponentsVersion = '1.1.0'
     androidXCardView = '1.0.0'
     archComponentsVersion = '2.2.0'
+    mock_web_server_version = '3.12.1'
+    mockito_kotlin_version = '1.6.0'
+    mockito_version = '2.23.0'
+    junit_version = '4.12'
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -77,4 +81,16 @@ dependencies {
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:${archComponentsVersion}"
+
+    // Test APIs
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    androidTestImplementation "junit:junit:$junit_version"
+
+    // Mockito
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
+
+    // Mock Web Server
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mock_web_server_version"
 }
