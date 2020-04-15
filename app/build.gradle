@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.leomoraes.marvelapp"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
+        def publicKey = properties.getProperty("API_KEY_PUBLIC")
+        def privateKey = properties.getProperty("API_KEY_PRIVATE")
+
+        buildConfigField "String", "BASE_URL", "\"https://gateway.marvel.com/\""
+        buildConfigField "String", "PUBLIC_KEY", publicKey
+        buildConfigField "String", "PRIVATE_KEY", privateKey
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+ext {
+    koinVersion = '2.0.1'
+    picassoVersion = '2.71828'
+    rxAndroidVersion = '2.1.1'
+    rxKotlinVersion = '2.1.0'
+    gsonVersion = '2.8.1'
+    okHttpVersion = '3.8.1'
+    retrofitVersion = '2.3.0'
+    appCompatVersion = '1.2.0-beta01'
+    constraintLayoutVersion = '2.0.0-beta4'
+    androidXComponentsVersion = '1.1.0'
+    androidXCardView = '1.0.0'
+    archComponentsVersion = '2.2.0'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Koin
+    implementation "org.koin:koin-android:${koinVersion}"
+    implementation "org.koin:koin-core:${koinVersion}"
+    implementation "org.koin:koin-android-viewmodel:${koinVersion}"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:${picassoVersion}"
+
+    // RX Java
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+    implementation "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"
+
+    // Retrofit2
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+
+    // UI
+    implementation "androidx.appcompat:appcompat:${appCompatVersion}"
+    implementation "androidx.recyclerview:recyclerview:${androidXComponentsVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}"
+    implementation "androidx.cardview:cardview:${androidXCardView}"
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:${archComponentsVersion}"
+}

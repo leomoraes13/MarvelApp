@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MarvelApp</string>
+    <string name="dialog_error_title">Oops! Something bad happened.</string>
+    <string name="dialog_error_generic">It was not possible to complete the request. Try again later.</string>
+    <string name="dialog_error_ok_button">Ok</string>
+</resources>
